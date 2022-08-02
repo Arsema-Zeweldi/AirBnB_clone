@@ -1,4 +1,5 @@
-![AirBnB](assets/hbnb_logo.png)
+![AirBnB](Image/hbnb_logo.png)
+
 # <h1 align="center">AirBnB clone The Console</h1>
 
 
