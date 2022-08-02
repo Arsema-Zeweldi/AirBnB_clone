@@ -1,6 +1,6 @@
 ![AirBnB](Image/hbnb_logo.png)
 
-# <h1 align="center">AirBnB clone The Console</h1>
+# <h1 align="center">AirBnB clone - The Console Project </h1>
 
 
 ## DESCRIPTION
