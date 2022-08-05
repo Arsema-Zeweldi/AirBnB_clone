@@ -3,10 +3,9 @@ from models.engine.file_storage import FileStorage
 from models.user import User
 from models.state import State
 from models.city import City
-from models.place import Place
 from models.amenity import Amenity
+from models.place import Place
 from models.review import Review
-
 
 storage = FileStorage()
 
@@ -19,7 +18,7 @@ class Classes(dict):
             raise Exception("** class doesn't exist **")
 
 
-models = [BaseModel, User, State, City, Place, Amenity, Review]
+models = [BaseModel, User, State, City, Amenity, Place, Review]
 classes = Classes(**{x.__name__: x for x in models})
 
 storage.reload()

@@ -8,4 +8,4 @@ from models.base_model import BaseModel
 class City(BaseModel):
     """ inherits BaseModel """
     state_id = ""
-    city_name = ""
+    name = ""
