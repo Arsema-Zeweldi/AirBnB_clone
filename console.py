@@ -56,7 +56,7 @@ class HBNBCommand(cmd.Cmd):
             model = eval(my_data[0])()
             model.save()
             print(model.id)
-        except:
+        except Exception as e:
             print("** class doesn't exist **")
 
     def do_show(self, arg):
@@ -143,6 +143,44 @@ class HBNBCommand(cmd.Cmd):
                         storage.save()
                     return
             print("** no instance found **")
+
+    def default(self, arg):
+        val_dict = {
+            "all": self.do_all,
+            "count": self.do_count,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update
+        }
+        arg = arg.strip()
+        values = arg.split(".")
+        if len(values) != 2:
+            cmd.Cmd.default(self, arg)
+            return
+        class_name = values[0]
+        command = values[1].split("(")[0]
+        line = ""
+        try:
+            inputs = values[1].split("(")[1].split(",")
+            for num in range(len(inputs)):
+                if (num != len(inputs) - 1):
+                    line = line + " " + shlex.split(inputs[num])[0]
+                else:
+                    line = line + " " + shlex.split(inputs[num][0:-1])[0]
+        except IndexError:
+            inputs = ""
+            line = ""
+        line = class_name + line
+        if (command in val_dict.keys()):
+            val_dict[command](line.strip())
+
+    def do_count(self, arg):
+        counter = 0
+        my_dict = storage.all()
+        for key in my_dict:
+            if (arg in key):
+                counter += 1
+        print(counter)
 
 
 if __name__ == '__main__':
