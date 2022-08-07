@@ -5,6 +5,7 @@
 import cmd
 import shlex
 import json
+import models
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -47,6 +48,7 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_create(self, args):
+        """ do_create method """
         if len(args) == 0:
             print('** class name missing **')
             return
@@ -60,25 +62,27 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, arg):
-        my_data = shlex.split(arg)
-        if len(my_data) == 0:
-            print("** class name missing **")
+        """ do_show method"""
+        if arg == "":
+            print('** class name missing **')
             return
-        if my_data[0] not in HBNBCommand.classes.keys():
-            print("** class doesn't exist **")
-            return
-        if len(my_data) == 1:
-            print("** instance id missing **")
-        storage.reload()
-        my_dict = storage.all()
-        key = my_data[0] + "." + my_data[1]
-        if key in my_dict:
-            my_instance = str(my_dict[key])
-            print(my_instance)
-        else:
-            print("** no instance found **")
+
+        try:
+            model_name, model_id = arg.split(' ')
+            model = models.storage.find(model_name, model_id)
+            print(model.__str__())
+
+        except Exception as e:
+
+            if arg.count(' ') == 0:
+                print("** instance id missing **")
+            elif arg.count(' ') > 1:
+                print("** too many arguments (2 arguments required)**")
+            else:
+                print(e)
 
     def do_destroy(self, arg):
+        """ do_destroy method """
         my_data = shlex.split(arg)
 
         if len(my_data) == 0:
@@ -100,6 +104,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
+        """ do_all method """
         storage.reload()
         my_json = []
         my_dict = storage.all()
@@ -118,6 +123,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, args):
+        """ do_update method """
         if not args:
             print("** class name missing **")
             return
@@ -145,6 +151,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def default(self, arg):
+        """ default method """
         val_dict = {
             "all": self.do_all,
             "count": self.do_count,
@@ -175,6 +182,7 @@ class HBNBCommand(cmd.Cmd):
             val_dict[command](line.strip())
 
     def do_count(self, arg):
+        """ do_count method """
         counter = 0
         my_dict = storage.all()
         for key in my_dict:
