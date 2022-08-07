@@ -61,25 +61,22 @@ class HBNBCommand(cmd.Cmd):
         except Exception as e:
             print("** class doesn't exist **")
 
-    def do_show(self, arg):
+    def do_show(self, args):
         """ do_show method"""
-        if arg == "":
-            print('** class name missing **')
-            return
-
-        try:
-            model_name, model_id = arg.split(' ')
-            model = models.storage.find(model_name, model_id)
-            print(model.__str__())
-
-        except Exception as e:
-
-            if arg.count(' ') == 0:
+        if not (args):
+            print("** class name missing **")
+        else:
+            args = args.split()
+            if len(args) != 2:
                 print("** instance id missing **")
-            elif arg.count(' ') > 1:
-                print("** too many arguments (2 arguments required)**")
+            elif args[0] not in HBNBCommand.classes:
+                print("** class doesn't exist **")
             else:
-                print(e)
+                for k, v in storage.all().items():
+                    if args[1] == v.id:
+                        print(v)
+                        return
+                print("** no instance found **")
 
     def do_destroy(self, arg):
         """ do_destroy method """
