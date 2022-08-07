@@ -40,6 +40,35 @@ class BaseModel:
                 dict_repr[key] = value
         return dict_repr
 
+    def do_update(self, args):
+        """ Updates an instance based on the class name and id """
+
+        if not args:
+            print("** class name missing **")
+            return
+
+        token = args.split()
+
+        if token[0] not in theClasses:
+            print("** class doesn't exist **")
+        elif len(token) == 1:
+            print("** instance id missing **")
+        else:
+            all_objs = storage.all()
+            for key, val in all_objs.items():
+                ob_name = val.__class__.__name__
+                ob_id = val.id
+                if ob_name == token[0] and ob_id == token[1].strip('"'):
+                    if len(token) == 2:
+                        print("** attribute name missing **")
+                    elif len(token) == 3:
+                        print("** value missing **")
+                    else:
+                        setattr(val, token[2], token[3])
+                        storage.save()
+                    return
+            print("** no instance found **")
+
     def __str__(self):
         """ __str__ method """
         class_name = self.__class__.__name__
