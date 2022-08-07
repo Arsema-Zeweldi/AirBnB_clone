@@ -36,8 +36,8 @@ class TestClass(unittest.TestCase):
             data = json.loads(file_string)
 
         self.assertTrue(
-                '{}.{}'.format(type(self.model).__name__, self.model.id) in data
-            )
+                '{}.{}'.format(type(self.model).__name__, self.model.id)
+                in data)
 
         self.assertDictEqual(
             self.model.to_dict(),
