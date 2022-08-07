@@ -26,19 +26,22 @@ class BaseModel:
             models.storage.new(self)
 
     def save(self):
+        """ save method """
         self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
-        dict_repr = {}
+        """ to_dict method """
+        dict_repr = self.__dict__.copy()
+        dict_repr["__class__"] = self.__class__.__name__
         for key, value in self.__dict__.items():
-            dict_repr[key] = value
-            if isinstance(value, datetime):
-                dict_repr[key] = value.strftime('%Y-%m-%dT%H:%M:%S.%f')
-        dict_repr["__class__"] = type(self).__name__
+            if key in ("created_at", "updated_at"):
+                value = self.__dict__[key].isoformat()
+                dict_repr[key] = value
         return dict_repr
 
     def __str__(self):
+        """ __str__ method """
         class_name = self.__class__.__name__
         return("[{}] ({}) {}".format(class_name, self.id, self.__dict__))
 
