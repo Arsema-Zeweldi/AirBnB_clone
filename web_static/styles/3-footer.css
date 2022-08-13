@@ -1,0 +1,13 @@
+footer {
+	background-color: white;
+	position: absolute;
+	bottom: 0;
+	height: 60px;
+	width: 100%;
+	border-top: 1px solif #CCCCCC
+}
+.school {
+	height: 60px;
+	line-height: 60px;
+	margin: 0;
+}
