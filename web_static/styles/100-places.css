@@ -65,16 +65,16 @@
 }
 
 .places article .information .max_guest {
-        background-image: url('../images/icon_group.png');
+        background-image: url('../images/guests.png');
 }
 
 
 .places article .information .number_rooms {
-        background-image: url('../images/icon_bed.png');
+        background-image: url('../images/bedrooms.png');
 }
 
 .places article .information .number_bathrooms {
-        background-image: url('../images/icon_bath.png');
+        background-image: url('../images/bathrooms.png');
 }
 
 .places article .information .max_guest,
@@ -122,19 +122,25 @@
 }
 
 .places>article>.amenities>ul li:nth-child(1) {
-        background-image: url('../images/icon_tv.png');
+        background-image: url('../images/tv.png');
         background-repeat: no-repeat;
         background-size: 30px;
 }
 
 .places>article>.amenities>ul li:nth-child(2) {
-        background-image: url('../images/icon_wifi.png');
+        background-image: url('../images/wifi.png');
         background-repeat: no-repeat;
         background-size: 30px;
 }
 
 .places>article>.amenities>ul li:nth-child(3) {
-        background-image: url('../images/icon_pets.png');
+        background-image: url('../images/pets.png');
+        background-repeat: no-repeat;
+        background-size: 30px;
+}
+
+.places>article>.amenities>ul li:nth-child(4) {
+        background-image: url('../images/swimming_pool.png');
         background-repeat: no-repeat;
         background-size: 30px;
 }

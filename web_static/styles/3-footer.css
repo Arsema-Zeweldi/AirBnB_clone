@@ -4,7 +4,10 @@ footer {
 	bottom: 0;
 	height: 60px;
 	width: 100%;
-	border-top: 1px solif #CCCCCC
+	border-top: 1px solid #CCCCCC;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 footer p {
 	height: 60px;
